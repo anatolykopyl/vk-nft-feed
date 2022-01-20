@@ -1,0 +1,17 @@
+{
+  "name": "vk-wall-nft-collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.2.0",
+    "rarepress": "^0.1.7"
+  }
+}
