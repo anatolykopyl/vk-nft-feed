@@ -1,3 +1,4 @@
+import ProgressBar from 'progress';
 import getPosts from './getPosts.js';
 import post2Svg from './post2Svg.js';
 
@@ -19,11 +20,25 @@ async function getAllPosts(owner_id) {
   let finished = false;
   let offset = 0;
   let posts = [];
+  let bar;
 
   while (!finished) {
     const response = await getPosts(owner_id, offset);
+    const total = response.count;
+
+    if (!bar) {
+      bar = new ProgressBar(
+        'Getting posts [:bar] :current/:total :percent', 
+        { 
+          total,
+          width: 30,
+        }
+      );
+    }
+    bar.tick(response.items.length);
+
     posts = posts.concat(response.items);
-    if (posts.length === response.count) {
+    if (posts.length === total) {
       finished = true;
     } else {
       offset += response.items.length;
