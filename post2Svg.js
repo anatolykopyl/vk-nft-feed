@@ -1,22 +1,22 @@
+import {createSVGWindow} from 'svgdom';
+import {SVG, registerWindow} from '@svgdotjs/svg.js';
+
 function makeSvg(images) {
   const spacing = 50;
   const height = images.length * (900 + spacing) + spacing;
 
-  function imageTag(url, n) {
-    const y = 50 + n * (900 + spacing);
-    return `<image x="50" y="${y}" width="900" height="900" href="${url}"/>`;
-  }
+  const window = createSVGWindow();
+  const document = window.document;
+  registerWindow(window, document);
 
-  let imageTags = '';
-
+  const draw = SVG(document.documentElement).width(1000).height(height);
+  draw.rect(1000, height).fill('white');
   images.forEach((image, i) => {
-    imageTags += imageTag(image.url, i);
-  })
+    const y = 50 + i * (900 + spacing);
+    draw.image(image.url).x(50).y(y).width(900).height(900)
+  });
 
-  return `<svg viewBox="0 0 1000 ${height}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="white" />
-  ${imageTags}
-</svg>\n`;
+  return draw.svg();
 }
 
 export default function(post) {
@@ -26,7 +26,7 @@ export default function(post) {
 
   const images = photoAttachments.map((attachment) => {
     return {
-      url: attachment.photo.sizes[attachment.photo.sizes.length - 1].url.replaceAll('&', '&amp;'),
+      url: attachment.photo.sizes[attachment.photo.sizes.length - 1].url,
     };
   });
 
