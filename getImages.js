@@ -1,5 +1,5 @@
 import getPosts from './getPosts.js';
-import post2Svg from './post2Svg.js';
+import postToImage from './postToImage.js';
 
 function filterPosts(posts) {
   return posts.filter((post) => {
@@ -21,9 +21,9 @@ export default async function(owner_id) {
 
   let images = [];
 
-  posts.forEach((post) => {
-    images.push(post2Svg(post));
-  })
+  for (const post of posts) {
+    images.push(await postToImage(post));
+  }
 
   return images;
 }

@@ -1,5 +1,6 @@
 import {createSVGWindow} from 'svgdom';
 import {SVG, registerWindow} from '@svgdotjs/svg.js';
+// import sharp from 'sharp';
 
 function makeSvg(images) {
   const spacing = 50;
@@ -18,6 +19,10 @@ function makeSvg(images) {
 
   return draw.svg();
 }
+
+// function svgToPng(svg) {
+//   return sharp(Buffer.from(svg)).toBuffer();
+// }
 
 export default function(post) {
   const photoAttachments = post.attachments.filter((attachment) => {

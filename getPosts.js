@@ -1,6 +1,8 @@
 import axios from 'axios';
 import ProgressBar from 'progress';
 
+const DELAY = 3000;
+
  async function getPosts(owner_id, offset) {
   const res = await axios.get('https://api.vk.com/method/wall.get', {
     params: {
@@ -42,7 +44,7 @@ export default async function getAllPosts(owner_id) {
       finished = true;
     } else {
       offset += response.items.length;
-      await new Promise(r => setTimeout(r, 5000));
+      await new Promise(r => setTimeout(r, DELAY));
     }
   }
 
