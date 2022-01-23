@@ -3,7 +3,9 @@ dotenv.config();
 
 import Rareterm from 'rareterm.node';
 import getImages from './getImages.js';
+import logo from './logo.js';
 
+logo();
 const entity = process.argv[2];
 
 (async () => {
