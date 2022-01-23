@@ -22,7 +22,7 @@ export default async function(owner_id) {
   let images = [];
 
   for (const post of posts) {
-    images.push(await postToImage(post));
+    images.push(...postToImage(post));
   }
 
   return images;

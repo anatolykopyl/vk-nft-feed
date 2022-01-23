@@ -11,12 +11,12 @@ const entity = process.argv[2];
   await rarepress.init({ host: "https://rinkeby-beta.rarepress.org/v1" });
   
   (await getImages(entity)).forEach(async (image, index) => {
-    const cid = await rarepress.fs.add(Buffer.from(image));
+    const cid = await rarepress.fs.add(image);
     const token = await rarepress.token.create({
       type: "ERC721",
       metadata: {
         name: `${index}`,
-        description: `${index}.svg`,
+        description: `Picture #${index}`,
         image: `/ipfs/${cid}`,
       },
     });
